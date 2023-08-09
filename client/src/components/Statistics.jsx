@@ -1,38 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
-import LineChart from "./Charts/LineChart";
 
-import BarChart from "./Charts/BarChart";
 import { Bar } from "react-chartjs-2";
 const Statistics = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  const [batleft_data, set_batleft_data] = useState();
 
   const [SmartWatchData, setSmartWatchData] = useState([]);
   const fetchData = async () => {
     const { data } = await axios.get("http://localhost:5000/api/v1/getData");
     setSmartWatchData(data.data);
-    set_batleft_data({
-      labels: [1, 2, 3, 4, 5],
-      datasets: [
-        {
-          label: "Battery Left",
-          data: data.data.map((data) => data.structure.battery_left),
-          backgroundColor: [
-            "rgba(75,192,192,1)",
-            "#ecf0f1",
-            "#50AF95",
-            "#f3ba2f",
-            "#2a71d0",
-          ],
-          borderColor: "black",
-          borderWidth: 2,
-        },
-      ],
-    });
   };
 
   return (
