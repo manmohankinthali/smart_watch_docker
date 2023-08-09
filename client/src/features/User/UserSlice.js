@@ -32,7 +32,7 @@ export const LoginUser = createAsyncThunk(
 );
 
 export const UserDetails = createAsyncThunk("user/details", async () => {
-  const { data } = await axios.get(`http://localhost:5000/api/v1/me`);
+  const { data } = await axios.get(`/api/v1/me`);
   return data;
 });
 export const LogoutUser = createAsyncThunk("logout/user", async () => {
