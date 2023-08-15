@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Line } from "react-chartjs-2";
+import { Chart, registerables } from "chart.js";
 
 import { Bar } from "react-chartjs-2";
+Chart.register(...registerables);
 const Statistics = () => {
   useEffect(() => {
     fetchData();
