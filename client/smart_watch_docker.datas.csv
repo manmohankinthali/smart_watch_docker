@@ -1,0 +1,6 @@
+_id,structure.latitude_dec,structure.latitude_frac,structure.longitude_dec,structure.longitude_frac,structure.unix_timestamp,structure.panic_switch,structure.sos_switch,structure.gsm_msg,structure.battery_left,structure.touch_pos_x,structure.touch_pos_y,structure.crc,device_id,timestamp,__v
+64d26d36246cec0afdf3e11f,12345,56789,-98765,-12345,1667827200,0,1,72,50,320,240,2382552651,device_id_1,2023-08-08T16:28:38.039Z,0
+64d26d36246cec0afdf3e124,12345,56789,-98765,-12345,1667827200,0,1,72,50,320,240,2382552651,device_id_1,2023-08-08T16:28:38.465Z,0
+64d26d38246cec0afdf3e129,12345,56789,-98765,-12345,1667827200,0,1,72,50,320,240,2382552651,device_id_1,2023-08-08T16:28:40.451Z,0
+64d26d39246cec0afdf3e12e,12345,56789,-98765,-12345,1667827200,0,1,72,50,320,240,2382552651,device_id_1,2023-08-08T16:28:41.162Z,0
+64d26d81246cec0afdf3e133,12345,56789,-98765,-12345,1667827200,0,1,72,50,320,240,2382552651,device_id_1,2023-08-08T16:29:53.581Z,0

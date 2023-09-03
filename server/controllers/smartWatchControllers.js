@@ -32,11 +32,19 @@ exports.sendData = catchAsyncErrors(async (req, res, next) => {
   const { structure, device_id } = req.body;
   const crc32Value = calculateCRC32(structure);
   structure.crc = crc32Value;
+  const Rawdate = new Date(structure.unix_timestamp * 1000);
+  let date = Rawdate.getDate();
+  const month = Rawdate.getMonth();
+  const year = Rawdate.getFullYear();
+  actDate = `${date} ${month}`;
+
+  console.log(`${date}-${month}`);
 
   //   console.log(`CRC-32 value: 0x${crc32Value.toString(16).toUpperCase()}`);
 
   const data = await Data.create({
     structure: structure,
+    date: Rawdate,
 
     device_id: device_id,
   });
@@ -46,11 +54,22 @@ exports.sendData = catchAsyncErrors(async (req, res, next) => {
 exports.getData = catchAsyncErrors(async (req, res, next) => {
   try {
     const data = await Data.find();
-    res.status(200).json({ success: true, data: data });
+    let result = await Data.aggregate([
+      {
+        $group: {
+          _id: "$date",
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: {
+          _id: 1,
+        },
+      },
+    ]);
+    res.status(200).json({ success: true, data: data, result: result });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false });
   }
 });
-
-//login

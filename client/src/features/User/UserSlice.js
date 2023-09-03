@@ -18,7 +18,7 @@ export const LoginUser = createAsyncThunk(
   "login/user",
   async ({ Email, password }) => {
     const { data } = await axios.post(
-      `http://localhost:5000/api/v1/login`,
+      `/api/v1/login`,
       { Email, password },
       {
         headers: {
@@ -44,16 +44,12 @@ export const userRegister = createAsyncThunk(
   async (myform) => {
     console.log(myform.get("name"));
     console.log(`this is userRegister${myform}`);
-    const { data } = await axios.post(
-      `http://localhost:5000/api/v1/register`,
-      myform,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          withCredentials: true,
-        },
-      }
-    );
+    const { data } = await axios.post(`/api/v1/register`, myform, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        withCredentials: true,
+      },
+    });
     console.log(`this is userRegister`);
     console.log(myform);
     return data;
@@ -105,7 +101,7 @@ const userSlice = createSlice({
       state.loggedIn = true;
       state.loading = false;
       state.userData = action.payload.data;
-      state.profileUrl = action.payload.data.avator.url;
+      // state.profileUrl = action.payload.data.avator.url;
       state.name = action.payload.data.name;
     },
     [UserDetails.rejected]: (state, action) => {

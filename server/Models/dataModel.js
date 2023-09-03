@@ -43,7 +43,8 @@ const dataSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  timestamp: { type: Date, default: Date.now },
+
+  date: { type: Date },
 });
 const Data = mongoose.model("Data", dataSchema);
 module.exports = Data;

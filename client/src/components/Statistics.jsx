@@ -12,8 +12,9 @@ const Statistics = () => {
 
   const [SmartWatchData, setSmartWatchData] = useState([]);
   const fetchData = async () => {
-    const { data } = await axios.get("http://localhost:5000/api/v1/getData");
-    setSmartWatchData(data.data);
+    const { data } = await axios.get("/api/v1/getData");
+    console.log(data);
+    setSmartWatchData(data.result);
   };
 
   return (
@@ -24,13 +25,11 @@ const Statistics = () => {
           <Line
             className="h-80"
             data={{
-              labels: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+              labels: SmartWatchData.map((data) => data._id),
               datasets: [
                 {
-                  label: "Battery Left",
-                  data: SmartWatchData.map(
-                    (data) => data.structure.battery_left
-                  ),
+                  label: "No.of entries",
+                  data: SmartWatchData.map((data) => data.count),
                   backgroundColor: [
                     "rgba(75,192,192,1)",
                     "#ecf0f1",
@@ -40,12 +39,13 @@ const Statistics = () => {
                   ],
                   borderColor: "black",
                   borderWidth: 2,
+                  tension: 0.3,
                 },
               ],
             }}
           />
         </div>
-        <div className="mt-32 ">
+        {/* <div className="mt-32 ">
           <h1 className="text-3xl mb-5"> battery_left v/s no.of entries </h1>
           <Bar
             className="h-80"
@@ -130,7 +130,7 @@ const Statistics = () => {
               ],
             }}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );
