@@ -59,6 +59,8 @@ exports.getData = catchAsyncErrors(async (req, res, next) => {
         $group: {
           _id: "$date",
           count: { $sum: 1 },
+          device_ids: { $addToSet: "$device_id" },
+          lastBatteryPercentage: { $first: "$structure.battery_left" },
         },
       },
       {
@@ -67,6 +69,21 @@ exports.getData = catchAsyncErrors(async (req, res, next) => {
         },
       },
     ]);
+    // let result = await Data.aggregate([
+    //   {
+    //     $sort: {
+    //       device_id: 1,
+    //       date: -1,
+    //     },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: "$device_id",
+    //       lastBatteryPercentage: { $first: "$structure.battery_left" },
+    //       dates: { $push: "$date" },
+    //     },
+    //   },
+    // ]);
     res.status(200).json({ success: true, data: data, result: result });
   } catch (error) {
     console.log(error);
